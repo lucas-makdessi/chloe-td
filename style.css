@@ -1,0 +1,87 @@
+/* Overall layout */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  font-family: sans-serif;
+  color: white;
+}
+
+#main-container {
+  display: flex;
+  width: 100%;
+  max-width: 1400px; /* optional max width */
+  gap: 20px;
+}
+
+/* Left Column */
+#left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* info top, button bottom */
+  width: 180px;
+  padding: 20px; /* add space from edges */
+}
+
+#game-info p {
+  margin: 10px 0;
+}
+
+#start-button-container {
+  margin-bottom: 20px;
+}
+
+#startWave {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100%;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+#startWave:disabled {
+  background-color: #777;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#startWave:hover {
+  background-color: #218838;
+}
+
+/* Center Column */
+#center-column {
+  flex: 1; /* take remaining space */
+  display: flex;
+  justify-content: center; /* center canvas horizontally */
+  align-items: center;     /* center canvas vertically */
+}
+
+/* Right Column */
+#right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 180px;
+  padding: 20px; /* add space from edges */
+}
+
+
+.tower-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tower-option img {
+  width: 80px;
+  height: 80px;
+}

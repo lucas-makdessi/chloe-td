@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chloe Tower Defense</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="main-container">
+    <!-- Left Column -->
+    <div id="left-column">
+      <div id="game-info">
+        <p>Money: <span id="money">100</span></p>
+        <p>Lives: <span id="lives">20</span></p>
+        <p>Wave: <span id="wave">0</span></p>
+      </div>
+      <div id="start-button-container">
+        <button id="startWave">Start Wave</button>
+      </div>
+    </div>
+
+    <!-- Center Column -->
+    <div id="center-column">
+      <canvas id="game" width="800" height="600"></canvas>
+    </div>
+
+    <!-- Right Column -->
+    <div id="right-column">
+      <p><strong>Buy Towers:</strong></p>
+      <div class="tower-option" id="chloe-tower">
+        <img src="chloe.png" alt="Chloe Tower" />
+        <p>Chloe</p>
+      </div>
+      <div class="tower-option" id="lucas-tower">
+        <img src="lucas.png" alt="Lucas Tower" />
+        <p>Lucas</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
