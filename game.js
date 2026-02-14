@@ -23,7 +23,7 @@ const path = [
   { x: 800, y: 525 }  // END
 ];
 
-let lives = 20;
+let lives = 5;
 const livesEl = document.getElementById("lives");
 let waveInProgress = false;
 
@@ -97,7 +97,7 @@ update() {
 
 // Draw path overlay (optional)
 function drawPath() {
-  ctx.strokeStyle = "rgba(255,200,0,0.5)";
+  ctx.strokeStyle = "rgba(255, 182, 193, 0.5)";
   ctx.lineWidth = 20;
   ctx.lineCap = "round";
   ctx.beginPath();
@@ -119,7 +119,7 @@ towerImages.lucas.src = "lucas.png";
 
 let money = 100;
 let selectedTower = null;
-const TOWER_COST = 50;
+const TOWER_COST = 75;
 const towers = [];
 
 // Update money display
@@ -166,9 +166,9 @@ canvas.addEventListener("click", () => {
     }
   }
 
+  // Disallow placement if over the path
   if (onPath) {
-    alert("Cannot place tower on the path!");
-    return;
+    return; // simply do nothing
   }
 
   // Place tower
@@ -226,7 +226,29 @@ function drawSelectedTower() {
   const img = towerImages[selectedTower.name];
   const w = selectedTower.width;
   const h = selectedTower.height;
-  ctx.drawImage(img, mouseX - w / 2, mouseY - h / 2, w, h);
+  const centerX = mouseX;
+  const centerY = mouseY;
+
+  // Check if current mouse position is valid
+  let onPath = false;
+  for (let i = 0; i < path.length - 1; i++) {
+    const a = path[i];
+    const b = path[i + 1];
+    const dist = pointToSegmentDistance(centerX, centerY, a.x, a.y, b.x, b.y);
+    if (dist < 25) { // minimum distance from path
+      onPath = true;
+      break;
+    }
+  }
+
+  // Draw the range circle
+  ctx.fillStyle = onPath ? "rgba(255,0,0,0.2)" : "rgba(0,255,0,0.2)";
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, selectedTower.name === "chloe" ? 120 : 160, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Draw the tower image
+  ctx.drawImage(img, centerX - w / 2, centerY - h / 2, w, h);
 }
 
 function drawPlacedTowers() {
@@ -244,10 +266,10 @@ function drawPlacedTowers() {
 
     // If hovering, draw filled transparent range circle
     if (dist <= t.width / 2) {
-      ctx.fillStyle = "rgba(255,255,0,0.2)"; // yellow transparent
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, t.range, 0, Math.PI * 2);
-      ctx.fill();
+        ctx.fillStyle = "rgba(180, 180, 180, 0.25)"; // light grey, 15% opacity
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, t.range, 0, Math.PI * 2);
+        ctx.fill();
     }
   });
 }
@@ -332,7 +354,7 @@ function startWave() {
 
 // Projectiles and Collision
 const projectiles = [];
-const POP_REWARD = 10;
+const POP_REWARD = 5;
 
 function updateProjectiles() {
   projectiles.forEach((p, pIndex) => {
